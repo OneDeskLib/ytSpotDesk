@@ -100,6 +100,55 @@ For features that require Spotify API access (like fetching playlist track data 
 4.  Log in to your Spotify account through the web browser.
 5.  Once logged in, you may be redirected to a callback URL (you can close this page). ytSpotDesk will attempt to retrieve and cache your Spotify token automatically. A success message box will appear in ytSpotDesk if the login is successful.
 
+### Setting up Spotify API Credentials (Optional, but Recommended for Spotify Features)
+
+ytSpotDesk can utilize the Spotify API to enhance features like renaming files with accurate track information and improved playlist handling. To enable these features, you'll need to set up your own Spotify API application and provide ytSpotDesk with your Client ID and Client Secret. This is an optional step, but highly recommended for the best experience with Spotify-related functionalities.
+
+**Here's how to set up your Spotify API credentials:**
+
+1.  **Go to the Spotify Developer Dashboard:**
+    *   Open your web browser and navigate to [https://developer.spotify.com/dashboard/](https://developer.spotify.com/dashboard/).
+    *   Log in with your Spotify account or create a new developer account if you don't have one.
+
+2.  **Create a New App:**
+    *   Once logged in to the Spotify Developer Dashboard, click on the **"Create App"** button.
+    *   A "Create a Client ID" form will appear. Fill in the required details:
+        *   **App Name:** Choose a name for your application (e.g., "ytSpotDesk App", "My ytSpotDesk"). This name is for your reference.
+        *   **App Description:** Provide a brief description (e.g., "ytSpotDesk music downloader app").
+        *   **Website:** You can enter `http://localhost` or any website URL here as it's not critically used for this application setup.
+        *   **Redirect URI:** **This is crucial!**  In the "Redirect URIs" field, enter the following exactly:
+            ```
+            http://localhost:5001/callback
+            ```
+            This URI **must match** the `SPOTIPY_REDIRECT_URI` defined in the ytSpotDesk code (which is already set to `http://localhost:5001/callback`).
+        *   Accept the Spotify Developer Terms of Service by checking the checkbox.
+    *   Click the **"Save"** button.
+
+3.  **Get your Client ID and Client Secret:**
+    *   After creating your app, you will be redirected to the app's "Settings" page.
+    *   You will find your **"Client ID"** and **"Client Secret"** on this page.
+    *   Click the **"Show Client Secret"** button to reveal your Client Secret.
+    *   **Important:** Keep your Client Secret secure and do not share it publicly.
+
+4.  **Enter Credentials into ytSpotDesk Settings:**
+    *   Launch ytSpotDesk if it's not already running.
+    *   Open the **"Options"** menu and select **"Settings"**.
+    *   In the "Settings" dialog, locate the fields:
+        *   **"Spotify Client ID"**:  Copy and paste your **Client ID** from the Spotify Developer Dashboard into this field.
+        *   **"Spotify Client Secret"**: Copy and paste your **Client Secret** from the Spotify Developer Dashboard into this field.
+    *   Click the **"Save"** button in the Settings dialog to save your Spotify API credentials.
+
+**Verification:**
+
+After entering your Client ID and Client Secret, you can try using features that rely on the Spotify API, such as:
+
+*   **Renaming files:** Attempt to rename files after downloading from a Spotify playlist or album URL. Check if track numbers and titles are fetched correctly.
+*   **Spotify Login:** Try logging in to Spotify through the "Options" menu -> "Login to Spotify". If successful, you should see a "Spotify Login Successful" message.
+
+If you encounter any issues, double-check that you have correctly copied the Client ID and Client Secret and that the Redirect URI in your Spotify App settings is exactly `http://localhost:5001/callback`.
+
+**Note:** Setting up Spotify API credentials is optional for basic downloading functionality from YouTube and Spotify using ytSpotDesk. However, it is necessary to unlock the full potential of Spotify-related features within the application.
+
 ### Updating spotdl and yt-dlp
 
 To ensure you have the latest versions of `spotdl` and `yt-dlp`:
@@ -123,6 +172,7 @@ To clear the output log area in the ytSpotDesk window:
 1.  Click on the **"Help"** menu in the menu bar.
 2.  Select **"Clear Log"**.
     *   Alternatively, you can click the **"Clear Log"** button located below the output log area.
+    *   
      
 ## Prerequisites
 
@@ -137,3 +187,6 @@ Install the necessary Python libraries using pip:
 
 ```bash
 pip install spotdl yt-dlp tkinter ttkthemes spotipy tinytag thefuzz requests
+
+
+
